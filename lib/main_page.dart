@@ -224,6 +224,3 @@ String formatCardNumber(String cardNumber){
   }
   return chunks.join(' ');
 }
-void hello(){
-  
-}
