@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:mange_card/for_test.dart';
 
 import 'main_page.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const MainPage(),
+      home: const ForTest(),
     );
   }
 }
