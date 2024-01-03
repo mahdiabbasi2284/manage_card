@@ -149,7 +149,7 @@ class _MainPageState extends State<MainPage> {
               ),
               dataCards.isEmpty
                   ? const Text('not card')
-                  : Container(
+                  : SizedBox(
                 height: 500,
                 child: ListView.builder(
                   shrinkWrap: true,
@@ -182,7 +182,7 @@ class _MainPageState extends State<MainPage> {
                 right: 70,
                 child: Text(
                   formatCardNumber(dataCard.cardNumber),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
               Positioned(

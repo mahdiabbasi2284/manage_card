@@ -1,6 +1,7 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
+
 
 class ForTest extends StatefulWidget {
   const ForTest({super.key});
@@ -19,18 +20,20 @@ class _ForTestState extends State<ForTest> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: Align(
-          alignment: Alignment.bottomRight,
-          child: FloatingActionButton(
-                backgroundColor: Colors.blue,
-                onPressed: () {
-                  showDialogWithPage(context);
-                },
-                child: Icon(Icons.add,color: Colors.white,),
+          floatingActionButton: Align(
+            alignment: Alignment.bottomRight,
+            child: FloatingActionButton(
+              backgroundColor: Colors.blue,
+              onPressed: () {
+                showDialogWithPage(context);
+              },
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
               ),
-        ),
-        body: Container()
-      ),
+            ),
+          ),
+          body: Container()),
     );
   }
 }
@@ -40,10 +43,10 @@ void showDialogWithPage(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('اضافه کردن کارت'),
+        title: const Text('اضافه کردن کارت'),
         content: Builder(
           builder: (BuildContext context) {
-            return Container(
+            return SizedBox(
               width: 500,
               child: Column(
                 children: [
@@ -55,6 +58,10 @@ void showDialogWithPage(BuildContext context) {
                           padding: const EdgeInsets.all(8),
                           child: TextFormField(
                             textAlign: TextAlign.center,
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly,
+                            //   _CardNumberFormatter()
+                            // ],
                             controller: cardNumberController1,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
@@ -62,99 +69,11 @@ void showDialogWithPage(BuildContext context) {
                               labelText: '',
                               border: OutlineInputBorder(),
                             ),
-                            onChanged: (value) {
-                              if (value.length == 4) {
-                                FocusScope.of(context).nextFocus();
-                              }
-                            },
                           ),
                         ),
                       ),
-                      Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(8),
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              controller: cardNumberController2,
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.fromLTRB(2, 1, 2, 1),
-                                labelText: '',
-                                border: OutlineInputBorder(),
-                              ),
-                              onChanged: (value) {
-                                if (value.length == 4) {
-                                  FocusScope.of(context).nextFocus();
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(8),
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              controller: cardNumberController3,
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.fromLTRB(2, 1, 2, 1),
-                                labelText: '',
-                                border: OutlineInputBorder(),
-                              ),
-                              onChanged: (value) {
-                                if (value.length == 4) {
-                                  FocusScope.of(context).nextFocus();
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(8),
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              controller: cardNumberController4,
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.fromLTRB(2, 1, 2, 1),
-                                labelText: '',
-                                border: OutlineInputBorder(),
-                              ),
-                              onChanged: (value) {
-                                if (value.length == 4) {
-                                  FocusScope.of(context).nextFocus();
-                                }
-                              },
-                            ),
-                          ),
-                        ),
                     ],
                   ),
-                  Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(8),
-                          child: TextFormField(
-                            textAlign: TextAlign.center,
-                            controller: cardNumberController2,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.fromLTRB(2, 1, 2, 1),
-                              border: OutlineInputBorder(),
-                            ),
-                            onChanged: (value) {
-                              if (value.length == 4) {
-                                FocusScope.of(context).nextFocus();
-                              }
-                            },
-                          ),
-                        ),
-                      ),
                 ],
               ),
             );
@@ -164,3 +83,29 @@ void showDialogWithPage(BuildContext context) {
     },
   );
 }
+
+// class _CardNumberFormatter extends TextInputFormatter {
+//   @override
+//   TextEditingValue formatEditUpdate(
+//     TextEditingValue oldValue,
+//     TextEditingValue newValue,
+//   ) {
+//     String text = newValue.text.replaceAll(RegExp(r'\D'), '');
+//     int spaceCount = (text.length / 4).floor();
+//     int offset = 0;
+
+//     for (int i = 0; i < spaceCount; i++) {
+//       if ((i * 4 + offset) < text.length) {
+//         text = text.replaceRange(i * 4 + offset, i * 4 + offset, '-');
+//         offset++;
+//       }
+//     }
+
+//     return newValue.copyWith(
+//       text: text,
+//       selection: TextSelection.collapsed(
+//         offset: text.length,
+//       ),
+//     );
+//   }
+// }
