@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:mange_card/card_show.dart';
-import 'package:mange_card/for_test.dart';
 
 
 void main() {
@@ -23,3 +22,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
