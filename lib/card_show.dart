@@ -146,7 +146,7 @@ class _CardShowState extends State<CardShow> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: () {},
-                      label: const Text('Scan'),
+                      label: const Text('Scan',style: TextStyle(color: Colors.black),),
                       icon: SvgPicture.asset('assets/icons/scan.svg'),
                     ),
                   ),
