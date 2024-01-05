@@ -1,8 +1,15 @@
+import 'package:credit_card_scanner/credit_card_scanner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+
+export 'package:credit_card_scanner/models/card_scan_options.dart';
+
+
+
 
 class CardShow extends StatefulWidget {
   const CardShow({super.key});
@@ -14,6 +21,30 @@ class CardShow extends StatefulWidget {
 class _CardShowState extends State<CardShow> {
   TextEditingController cardNumberController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
+
+  CardDetails? _cardDetails;
+  CardScanOptions scanOptions = const CardScanOptions(
+    scanCardHolderName: true,
+    validCardsToScanBeforeFinishingScan: 5,
+    possibleCardHolderNamePositions: [
+      CardHolderNameScanPosition.aboveCardNumber
+    ],
+  );
+
+  Future<void> scanCard() async {
+    final CardDetails? cardDetails = await CardScanner.scanCard(scanOptions: scanOptions);
+    if ( !mounted || cardDetails == null ) return;
+    setState(() {
+      _cardDetails = cardDetails;
+    });
+  }
+
+  @override
+  void initState() {
+    
+    super.initState();
+    cardNumberController.text.isEmpty ? _cardDetails?.cardNumber : cardNumberController.text.trim();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +176,7 @@ class _CardShowState extends State<CardShow> {
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      onPressed: () {},
+                      onPressed: scanCard,
                       label: const Text('Scan',style: TextStyle(color: Colors.black),),
                       icon: SvgPicture.asset('assets/icons/scan.svg'),
                     ),
@@ -170,6 +201,8 @@ class _CardShowState extends State<CardShow> {
                       ),
                     ),
                   ),
+                  Text('$_cardDetails'),
+                  
                 ],
               ),
             )
